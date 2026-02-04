@@ -14,6 +14,7 @@ class Users(Base):
         device_id:
         ldap_only:
         password: The password used for email authentication.
+        magic_link_token: Magic link token for passwordless guest authentication. When provided, authenticates the user using the magic link token instead of password. Requires guest magic link feature to be enabled.
 
         `Read in Mattermost API docs (users - Login) <https://developers.mattermost.com/api-documentation/#/operations/Login>`_
 

@@ -17,6 +17,14 @@ Agents
     :undoc-members:
     :show-inheritance:
 
+Ai
+--
+
+.. automodule:: mattermostautodriver.endpoints.ai
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 Audit Logs
 ----------
 
@@ -349,6 +357,14 @@ Reactions
 ---------
 
 .. automodule:: mattermostautodriver.endpoints.reactions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Recaps
+------
+
+.. automodule:: mattermostautodriver.endpoints.recaps
     :members:
     :undoc-members:
     :show-inheritance:

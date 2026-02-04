@@ -61,13 +61,13 @@ class PlaybookRuns(Base):
         owner_user_id: str,
         team_id: str,
         playbook_id: str,
-        description: str | None = None,
+        summary: str | None = None,
         post_id: str | None = None,
     ):
         """Create a new playbook run
 
         name: The name of the playbook run.
-        description: The description of the playbook run.
+        summary: The summary of the playbook run.
         owner_user_id: The identifier of the user who is commanding the playbook run.
         team_id: The identifier of the team where the playbook run's channel is in.
         post_id: If the playbook run was created from a post, this field contains the identifier of such post. If not, this field is empty.
@@ -78,7 +78,7 @@ class PlaybookRuns(Base):
         """
         __options = {
             "name": name,
-            "description": description,
+            "summary": summary,
             "owner_user_id": owner_user_id,
             "team_id": team_id,
             "post_id": post_id,
@@ -151,16 +151,17 @@ class PlaybookRuns(Base):
         """
         return self.client.get(f"/plugins/playbooks/api/v0/runs/{id}")
 
-    def update_playbook_run(self, id: str, name: str | None = None):
+    def update_playbook_run(self, id: str, name: str | None = None, summary: str | None = None):
         """Update a playbook run
 
         id: ID of the playbook run to retrieve.
-        name: The new name of the playbook run.
+        name: The new name of the playbook run. Must not be empty.
+        summary: The new summary of the playbook run. Can be empty to clear the summary.
 
         `Read in Mattermost API docs (playbook_runs - updatePlaybookRun) <https://developers.mattermost.com/api-documentation/#/operations/updatePlaybookRun>`_
 
         """
-        __options = {"name": name}
+        __options = {"name": name, "summary": summary}
         return self.client.patch(f"/plugins/playbooks/api/v0/runs/{id}", options=__options)
 
     def get_playbook_run_metadata(self, id: str):
@@ -283,7 +284,7 @@ class PlaybookRuns(Base):
         __options = {"item_num": item_num, "new_location": new_location}
         return self.client.put(f"/plugins/playbooks/api/v0/runs/{id}/checklists/{checklist}/reorder", options=__options)
 
-    def item_rename(self, id: str, checklist: int, item: int, title: str, command: str):
+    def item_rename(self, id: str, checklist: int, item: int, title: str, command: str, description: str | None = None):
         """Update an item of a playbook run's checklist
 
         id: ID of the playbook run whose checklist will be modified.
@@ -291,11 +292,12 @@ class PlaybookRuns(Base):
         item: Zero-based index of the item to modify.
         title: The new title of the item.
         command: The new slash command of the item.
+        description: The new description of the item, formatted with Markdown.
 
         `Read in Mattermost API docs (playbook_runs - itemRename) <https://developers.mattermost.com/api-documentation/#/operations/itemRename>`_
 
         """
-        __options = {"title": title, "command": command}
+        __options = {"title": title, "command": command, "description": description}
         return self.client.put(
             f"/plugins/playbooks/api/v0/runs/{id}/checklists/{checklist}/item/{item}", options=__options
         )

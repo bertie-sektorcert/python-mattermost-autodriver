@@ -30,7 +30,7 @@ class PlaybookRuns(Base):
         """Create a new playbook run
 
         name: The name of the playbook run.
-        description: The description of the playbook run.
+        summary: The summary of the playbook run.
         owner_user_id: The identifier of the user who is commanding the playbook run.
         team_id: The identifier of the team where the playbook run's channel is in.
         post_id: If the playbook run was created from a post, this field contains the identifier of such post. If not, this field is empty.
@@ -91,7 +91,8 @@ class PlaybookRuns(Base):
         """Update a playbook run
 
         id: ID of the playbook run to retrieve.
-        name: The new name of the playbook run.
+        name: The new name of the playbook run. Must not be empty.
+        summary: The new summary of the playbook run. Can be empty to clear the summary.
 
         `Read in Mattermost API docs (playbook_runs - updatePlaybookRun) <https://developers.mattermost.com/api-documentation/#/operations/updatePlaybookRun>`_
 
@@ -201,6 +202,7 @@ class PlaybookRuns(Base):
         item: Zero-based index of the item to modify.
         title: The new title of the item.
         command: The new slash command of the item.
+        description: The new description of the item, formatted with Markdown.
 
         `Read in Mattermost API docs (playbook_runs - itemRename) <https://developers.mattermost.com/api-documentation/#/operations/itemRename>`_
 

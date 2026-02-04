@@ -2,6 +2,7 @@ from .base import BaseDriver
 from ..client import Client
 from ..endpoints.access_control import AccessControl
 from ..endpoints.agents import Agents
+from ..endpoints.ai import Ai
 from ..endpoints.audit_logs import AuditLogs
 from ..endpoints.authentication import Authentication
 from ..endpoints.bleve import Bleve
@@ -44,6 +45,7 @@ from ..endpoints.plugins import Plugins
 from ..endpoints.posts import Posts
 from ..endpoints.preferences import Preferences
 from ..endpoints.reactions import Reactions
+from ..endpoints.recaps import Recaps
 from ..endpoints.remote_clusters import RemoteClusters
 from ..endpoints.reports import Reports
 from ..endpoints.roles import Roles
@@ -65,6 +67,7 @@ from ..endpoints.users import Users
 from ..endpoints.webhooks import Webhooks
 from ..endpoints_old.access_control import AccessControl as OldAccessControl
 from ..endpoints_old.agents import Agents as OldAgents
+from ..endpoints_old.ai import Ai as OldAi
 from ..endpoints_old.audit_logs import AuditLogs as OldAuditLogs
 from ..endpoints_old.authentication import Authentication as OldAuthentication
 from ..endpoints_old.bleve import Bleve as OldBleve
@@ -107,6 +110,7 @@ from ..endpoints_old.plugins import Plugins as OldPlugins
 from ..endpoints_old.posts import Posts as OldPosts
 from ..endpoints_old.preferences import Preferences as OldPreferences
 from ..endpoints_old.reactions import Reactions as OldReactions
+from ..endpoints_old.recaps import Recaps as OldRecaps
 from ..endpoints_old.remote_clusters import RemoteClusters as OldRemoteClusters
 from ..endpoints_old.reports import Reports as OldReports
 from ..endpoints_old.roles import Roles as OldRoles
@@ -134,6 +138,7 @@ class BaseDriverWithEndpoints(BaseDriver):
         super().__init__(options, client_cls, *args, **kwargs)
         self.access_control = OldAccessControl(self.client)
         self.agents = OldAgents(self.client)
+        self.ai = OldAi(self.client)
         self.audit_logs = OldAuditLogs(self.client)
         self.authentication = OldAuthentication(self.client)
         self.bleve = OldBleve(self.client)
@@ -176,6 +181,7 @@ class BaseDriverWithEndpoints(BaseDriver):
         self.posts = OldPosts(self.client)
         self.preferences = OldPreferences(self.client)
         self.reactions = OldReactions(self.client)
+        self.recaps = OldRecaps(self.client)
         self.remote_clusters = OldRemoteClusters(self.client)
         self.reports = OldReports(self.client)
         self.roles = OldRoles(self.client)
@@ -203,6 +209,7 @@ class TypedBaseDriverWithEndpoints(BaseDriver):
         super().__init__(options, client_cls, *args, **kwargs)
         self.access_control = AccessControl(self.client)
         self.agents = Agents(self.client)
+        self.ai = Ai(self.client)
         self.audit_logs = AuditLogs(self.client)
         self.authentication = Authentication(self.client)
         self.bleve = Bleve(self.client)
@@ -245,6 +252,7 @@ class TypedBaseDriverWithEndpoints(BaseDriver):
         self.posts = Posts(self.client)
         self.preferences = Preferences(self.client)
         self.reactions = Reactions(self.client)
+        self.recaps = Recaps(self.client)
         self.remote_clusters = RemoteClusters(self.client)
         self.reports = Reports(self.client)
         self.roles = Roles(self.client)

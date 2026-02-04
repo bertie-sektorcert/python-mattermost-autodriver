@@ -14,6 +14,7 @@ class Users(Base):
         device_id: str | None = None,
         ldap_only: bool | None = None,
         password: str | None = None,
+        magic_link_token: str | None = None,
     ):
         """Login to Mattermost server
 
@@ -23,6 +24,7 @@ class Users(Base):
         device_id:
         ldap_only:
         password: The password used for email authentication.
+        magic_link_token: Magic link token for passwordless guest authentication. When provided, authenticates the user using the magic link token instead of password. Requires guest magic link feature to be enabled.
 
         `Read in Mattermost API docs (users - Login) <https://developers.mattermost.com/api-documentation/#/operations/Login>`_
 
@@ -34,6 +36,7 @@ class Users(Base):
             "device_id": device_id,
             "ldap_only": ldap_only,
             "password": password,
+            "magic_link_token": magic_link_token,
         }
         return self.client.post("""/api/v4/users/login""", options=__options)
 
